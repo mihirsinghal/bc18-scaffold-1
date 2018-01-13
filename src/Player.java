@@ -9,6 +9,8 @@ public class Player {
 
     static GameController gc;
     static PlanetMap earthMap, marsMap;
+    static Random r = new Random(0xbeef);
+    static ArrayList<Direction> directions = new ArrayList<Direction>();
 
     public static void main(String[] args) {
         // You can use other files in this directory, and in subdirectories.
@@ -23,6 +25,16 @@ public class Player {
         // One slightly weird thing: some methods are currently static methods on a static class called bc.
         // This will eventually be fixed :/
         System.out.println("Opposite of " + Direction.North + ": " + bc.bcDirectionOpposite(Direction.North));
+        for (Direction dir : Direction.values()) {
+
+
+        }
+
+        for (Direction dir : Direction.values()) {
+            if (dir != Direction.Center) {
+                directions.add(dir);
+            }
+        }
 
         // Connect to the manager, starting the game
         gc = new GameController();
@@ -62,7 +74,7 @@ public class Player {
             for (int i = 0; i < units.size(); i++) {
                 Unit unit = units.get(i);
 
-                
+
             }
 
         } else {
@@ -75,6 +87,8 @@ public class Player {
                 if (gc.isMoveReady(unit.id()) && gc.canMove(unit.id(), Direction.Southeast)) {
                     gc.moveRobot(unit.id(), Direction.Southeast);
                 }
+
+
             }
 
         }
@@ -87,10 +101,7 @@ public class Player {
         for (int i = 0; i < units.size(); i++) {
             Unit unit = units.get(i);
 
-            // Most methods on gc take unit IDs, instead of the unit objects themselves.
-            if (gc.isMoveReady(unit.id()) && gc.canMove(unit.id(), Direction.Southeast)) {
-                gc.moveRobot(unit.id(), Direction.Southeast);
-            }
+
         }
 
     }
@@ -102,6 +113,14 @@ public class Player {
         } else {
             return false;
         }
+    }
+
+    static boolean tryMove(int id, Direction direction) {
+        return false; // TODO
+    }
+
+    static Direction[] shuffleDirectionss() {
+        Collections.shuffle(directions, r);
     }
 
 
