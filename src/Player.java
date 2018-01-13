@@ -9,6 +9,7 @@ public class Player {
 
 	static GameController gc;
 	static PlanetMap earthMap, marsMap;
+	static int earthWidth, marsWidth, earthHeight, marsHeight;
 	static Random r = new Random(0xbeef);
 	static ArrayList<Direction> directions = new ArrayList<Direction>();
 
@@ -44,6 +45,11 @@ public class Player {
 		earthMap = gc.startingMap(Planet.Earth);
 		marsMap = gc.startingMap(Planet.Mars);
 
+		earthWidth = (int) earthMap.getWidth();
+		marsWidth = (int) marsMap.getWidth();
+		earthHeight = (int) earthMap.getHeight();
+		earthHeight = (int) marsMap.getHeight();
+
 		long[][] earthKarb = new long[(int) earthMap.getHeight()][(int) earthMap.getWidth()];
 		long[][] marsKarb = new long[(int) marsMap.getHeight()][(int) marsMap.getWidth()];
 
@@ -51,6 +57,8 @@ public class Player {
 		while (true) {
 			System.out.println("Current round: " + gc.round());
 			// VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
+
+			// TODO exception handling (try/catch loop)
 
 			if (gc.planet() == Planet.Earth) {
 				doEarthTurn();
@@ -80,9 +88,6 @@ public class Player {
 			for (int i = 0; i < units.size(); i++) {
 				Unit unit = units.get(i);
 
-				// Most methods on gc take unit IDs, instead of the unit objects themselves.
-
-
 				switch (unit.unitType()) {
 
 					case Worker:
@@ -110,6 +115,7 @@ public class Player {
 	static void doWorkerAction(Unit unit) {
 
 		tryMoveRandom(unit);
+		tryReplicateRandom(unit);
 
 	}
 

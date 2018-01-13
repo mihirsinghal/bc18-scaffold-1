@@ -19,14 +19,18 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1552">
-              <caret line="126" column="13" lean-forward="false" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
+            <state relative-caret-position="1138">
+              <caret line="129" column="5" lean-forward="true" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
               <folding>
-                <element signature="e#0#3904#0" expanded="true" />
+                <element signature="e#0#4127#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#265#276#0" expanded="true" />
-                <element signature="e#3858#3859#0" expanded="true" />
-                <element signature="e#3899#3900#0" expanded="true" />
+                <element signature="e#325#336#0" expanded="true" />
+                <element signature="method#tryMove#0;class#Player#0" expanded="false" />
+                <element signature="method#tryMoveRandom#0;class#Player#0" expanded="false" />
+                <element signature="method#tryReplicate#0;class#Player#0" expanded="false" />
+                <element signature="method#tryReplicateRandom#0;class#Player#0" expanded="false" />
+                <element signature="e#4081#4082#0" expanded="true" />
+                <element signature="e#4122#4123#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -305,7 +309,18 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Player.java</url>
+          <line>141</line>
+          <properties class="Player" method="tryMoveRandom">
+            <option name="EMULATED" value="true" />
+          </properties>
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -349,14 +364,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1552">
-          <caret line="126" column="13" lean-forward="false" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
+        <state relative-caret-position="1138">
+          <caret line="129" column="5" lean-forward="true" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
           <folding>
-            <element signature="e#0#3904#0" expanded="true" />
+            <element signature="e#0#4127#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#265#276#0" expanded="true" />
-            <element signature="e#3858#3859#0" expanded="true" />
-            <element signature="e#3899#3900#0" expanded="true" />
+            <element signature="e#325#336#0" expanded="true" />
+            <element signature="method#tryMove#0;class#Player#0" expanded="false" />
+            <element signature="method#tryMoveRandom#0;class#Player#0" expanded="false" />
+            <element signature="method#tryReplicate#0;class#Player#0" expanded="false" />
+            <element signature="method#tryReplicateRandom#0;class#Player#0" expanded="false" />
+            <element signature="e#4081#4082#0" expanded="true" />
+            <element signature="e#4122#4123#0" expanded="true" />
           </folding>
         </state>
       </provider>
