@@ -119,7 +119,7 @@ public class Player {
         return false; // TODO
     }
 
-    static Direction[] shuffleDirectionss() {
+    static void shuffleDirections() {
         Collections.shuffle(directions, r);
     }
 
