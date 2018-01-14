@@ -2,7 +2,6 @@
 // See xxx for the javadocs.
 
 import bc.*;
-
 import java.util.*;
 
 public class Player {
@@ -19,9 +18,9 @@ public class Player {
 		// System.out.println(extra.toString());
 
 		// MapLocation is a data structure you'll use a lot.
-//        MapLocation loc = new MapLocation(Planet.Earth, 10, 20);
-//        System.out.println("loc: " + loc + ", one step to the Northwest: " + loc.add(Direction.Northwest));
-//        System.out.println("loc sd: " + loc.getX());
+		// MapLocation loc = new MapLocation(Planet.Earth, 10, 20);
+		// System.out.println("loc: " + loc + ", one step to the Northwest: " + loc.add(Direction.Northwest));
+		// System.out.println("loc sd: " + loc.getX());
 
 		// One slightly weird thing: some methods are currently static methods on a static class called bc.
 		// This will eventually be fixed :/
@@ -31,9 +30,9 @@ public class Player {
 		}
 
 		for (Direction dir : Direction.values()) {
-//			if (dir != Direction.Center) {
+			// if (dir != Direction.Center) {
 			directions.add(dir);
-//			}
+			// }
 		}
 
 		// Connect to the manager, starting the game
