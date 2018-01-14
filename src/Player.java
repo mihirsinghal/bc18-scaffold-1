@@ -10,7 +10,7 @@ public class Player {
 	static GameController gc;
 	static PlanetMap earthMap, marsMap;
 	static int earthWidth, marsWidth, earthHeight, marsHeight;
-	static Random r = new Random(0xbeef);
+	static Random rand = new Random(0xbeef);
 	static ArrayList<Direction> directions = new ArrayList<Direction>();
 
 	public static void main(String[] args) {
@@ -79,7 +79,7 @@ public class Player {
 			VecUnit units = gc.myUnits();
 			for (int i = 0; i < units.size(); i++) {
 				Unit unit = units.get(i);
-				tryReplicateRandom(unit);
+				tryReplicateRandom(unit); // assumes that there are only workers to start
 			}
 
 		} else {
@@ -91,7 +91,10 @@ public class Player {
 				switch (unit.unitType()) {
 
 					case Worker:
-						doWorkerAction(unit);
+						defaultEarthWorkerAction(unit);
+						break;
+					default:
+						break;
 
 				}
 
@@ -112,7 +115,7 @@ public class Player {
 
 	}
 
-	static void doWorkerAction(Unit unit) {
+	static void defaultEarthWorkerAction(Unit unit) {
 
 		tryMoveRandom(unit);
 		tryReplicateRandom(unit);
@@ -170,7 +173,7 @@ public class Player {
 	}
 
 	static void shuffleDirections() {
-		Collections.shuffle(directions, r);
+		Collections.shuffle(directions, rand);
 	}
 
 
