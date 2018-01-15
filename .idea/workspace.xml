@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6245e272-fcd8-40d0-8b7d-477cd960ea9d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/replay.bc18" afterPath="$PROJECT_DIR$/replay.bc18" />
+      <change beforePath="$PROJECT_DIR$/bc18-scaffold-1.iml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/replay.bc18" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -312,12 +312,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
-          <folding>
-            <element signature="e#44#45#0" expanded="false" />
-            <element signature="e#71#72#0" expanded="false" />
-            <element signature="e#103#104#0" expanded="false" />
-            <element signature="e#143#144#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -356,6 +351,14 @@
             <element signature="method#tryReplicate#0;class#Player#0" expanded="false" />
             <element signature="method#tryReplicateRandom#0;class#Player#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/replay.bc18">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-682886">
+          <caret line="0" column="1369" lean-forward="false" selection-start-line="0" selection-start-column="1369" selection-end-line="0" selection-end-column="1369" />
+          <folding />
         </state>
       </provider>
     </entry>
