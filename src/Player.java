@@ -179,7 +179,7 @@ public class Player {
 	static boolean harvestMax(Unit unit) {
 		int id = unit.id();
 		MapLocation loc = unit.location().mapLocation();
-		long maxk = -1;
+		long maxk = 0;
 		Direction maxdir = null;
 		for (Direction dir: directions) {
 			if (gc.canSenseLocation(loc.add(dir)) && (gc.karboniteAt(loc.add(dir)) > maxk)) {
@@ -187,10 +187,10 @@ public class Player {
 				maxdir = dir;
 			}
 		}
-		if (maxdir == null) {
-			maxdir = Direction.Center;
+		if (maxdir != null) {
+			return tryHarvest(unit, maxdir);
 		}
-		return tryHarvest(unit, maxdir);
+		return false;
 	}
 
 	static boolean tryMove(Unit unit, Direction direction) {
