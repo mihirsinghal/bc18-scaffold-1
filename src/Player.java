@@ -95,6 +95,18 @@ public class Player {
 					case Worker:
 						defaultEarthWorkerAction(unit);
 						break;
+					case Knight:
+						break;
+					case Ranger:
+						break;
+					case Mage:
+						break;
+					case Healer:
+						break;
+					case Factory:
+						break;
+					case Rocket:
+						break;
 					default:
 						break;
 
@@ -112,6 +124,27 @@ public class Player {
 		for (int i = 0; i < units.size(); i++) {
 			Unit unit = units.get(i);
 
+			switch (unit.unitType()) {
+
+				case Worker:
+					defaultEarthWorkerAction(unit); // TODO use the asteroid pattern
+					break;
+				case Knight:
+					break;
+				case Ranger:
+					break;
+				case Mage:
+					break;
+				case Healer:
+					break;
+				case Factory:
+					break;
+				case Rocket:
+					break;
+				default:
+					break;
+
+			}
 
 		}
 
