@@ -2,3 +2,6 @@ working_dir
 replay*
 viewer_latest*
 viewer_currentInstall.json
+bc18-scaffold-1.iml
+.DS_Store
+.idea*
