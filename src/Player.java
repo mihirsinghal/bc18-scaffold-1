@@ -152,11 +152,14 @@ public class Player {
 
 	static void defaultEarthWorkerAction(Unit unit) {
 
-		for(Direction dir : directions) {
-			if(tryHarvest(unit, dir)) break;
+		if (unit.location().isOnMap()) {
+//			for (Direction dir : directions) {
+//				if (tryHarvest(unit, dir)) break;
+//			}
+			harvestMax(unit);
+			tryMoveRandom(unit);
+			tryReplicateRandom(unit);
 		}
-		tryMoveRandom(unit);
-		tryReplicateRandom(unit);
 
 	}
 
@@ -171,6 +174,23 @@ public class Player {
 		} else {
 			return false;
 		}
+	}
+
+	static boolean harvestMax(Unit unit) {
+		int id = unit.id();
+		MapLocation loc = unit.location().mapLocation();
+		long maxk = -1;
+		Direction maxdir = null;
+		for (Direction dir: directions) {
+			if (gc.canSenseLocation(loc.add(dir)) && (gc.karboniteAt(loc.add(dir)) > maxk)) {
+				maxk = gc.karboniteAt(loc.add(dir));
+				maxdir = dir;
+			}
+		}
+		if (maxdir == null) {
+			maxdir = Direction.Center;
+		}
+		return tryHarvest(unit, maxdir);
 	}
 
 	static boolean tryMove(Unit unit, Direction direction) {
