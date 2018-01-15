@@ -146,6 +146,10 @@ public class Player {
 
 			}
 
+			if (gc.getTimeLeftMs() < 25) {
+				break;
+			}
+
 		}
 
 	}
