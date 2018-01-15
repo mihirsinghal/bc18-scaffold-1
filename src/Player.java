@@ -40,7 +40,7 @@ public class Player {
 		gc = new GameController();
 
 		// Direction is a normal java enum.
-		Direction[] directions = Direction.values();
+		// Direction[] directions = Direction.values();
 
 		earthMap = gc.startingMap(Planet.Earth);
 		marsMap = gc.startingMap(Planet.Mars);
@@ -54,11 +54,13 @@ public class Player {
 		long[][] marsKarb = new long[marsHeight][marsWidth];
 
 		while (true) {
-			System.out.println("Current round: " + gc.round());
+			if(gc.round() % 100 == 0) {
+				System.out.println("Round: " + gc.round());
+				System.out.println("K15: " + gc.karbonite());
+			}
 			// VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
 
 			// TODO exception handling (try/catch loop)
-
 			if (gc.planet() == Planet.Earth) {
 				doEarthTurn();
 			} else {
@@ -78,6 +80,7 @@ public class Player {
 			VecUnit units = gc.myUnits();
 			for (int i = 0; i < units.size(); i++) {
 				Unit unit = units.get(i);
+				assert unit.unitType() == UnitType.Worker;
 				tryReplicateRandom(unit); // assumes that there are only workers to start
 			}
 
