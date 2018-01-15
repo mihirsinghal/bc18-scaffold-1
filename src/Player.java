@@ -120,10 +120,10 @@ public class Player {
 	static void defaultEarthWorkerAction(Unit unit) {
 
 		for(Direction dir : directions) {
-			if(tryHarvest(unit, dir)) return;
+			if(tryHarvest(unit, dir)) break;
 		}
-		if(tryMoveRandom(unit)) return;
-		if(tryReplicateRandom(unit)) return;
+		tryMoveRandom(unit);
+		tryReplicateRandom(unit);
 
 	}
 
