@@ -24,10 +24,11 @@ public class Player {
 
 		// One slightly weird thing: some methods are currently static methods on a static class called bc.
 		// This will eventually be fixed :/
-		System.out.println("Opposite of " + Direction.North + ": " + bc.bcDirectionOpposite(Direction.North));
-		for (Direction dir : Direction.values()) {
-			System.out.println(dir);
-		}
+
+		// System.out.println("Opposite of " + Direction.North + ": " + bc.bcDirectionOpposite(Direction.North));
+		// for (Direction dir : Direction.values()) {
+		// 	System.out.println(dir);
+		// }
 
 		for (Direction dir : Direction.values()) {
 			// if (dir != Direction.Center) {
@@ -47,11 +48,10 @@ public class Player {
 		earthWidth = (int) earthMap.getWidth();
 		marsWidth = (int) marsMap.getWidth();
 		earthHeight = (int) earthMap.getHeight();
-		earthHeight = (int) marsMap.getHeight();
+		marsHeight = (int) marsMap.getHeight();
 
-		long[][] earthKarb = new long[(int) earthMap.getHeight()][(int) earthMap.getWidth()];
-		long[][] marsKarb = new long[(int) marsMap.getHeight()][(int) marsMap.getWidth()];
-
+		long[][] earthKarb = new long[earthHeight][earthWidth];
+		long[][] marsKarb = new long[marsHeight][marsWidth];
 
 		while (true) {
 			System.out.println("Current round: " + gc.round());
