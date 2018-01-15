@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6245e272-fcd8-40d0-8b7d-477cd960ea9d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
+      <change beforePath="$PROJECT_DIR$/replay.bc18" afterPath="$PROJECT_DIR$/replay.bc18" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,12 +18,10 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="623">
-              <caret line="117" column="40" lean-forward="false" selection-start-line="117" selection-start-column="40" selection-end-line="117" selection-end-column="40" />
+            <state relative-caret-position="128">
+              <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
               <folding>
-                <element signature="e#0#4241#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="e#328#339#0" expanded="true" />
+                <element signature="e#0#4227#0" expanded="true" />
                 <element signature="method#tryMoveRandom#0;class#Player#0" expanded="false" />
                 <element signature="method#tryReplicate#0;class#Player#0" expanded="false" />
                 <element signature="method#tryReplicateRandom#0;class#Player#0" expanded="false" />
@@ -350,12 +348,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="117" column="40" lean-forward="false" selection-start-line="117" selection-start-column="40" selection-end-line="117" selection-end-column="40" />
+        <state relative-caret-position="128">
+          <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
           <folding>
-            <element signature="e#0#4241#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#328#339#0" expanded="true" />
+            <element signature="e#0#4227#0" expanded="true" />
             <element signature="method#tryMoveRandom#0;class#Player#0" expanded="false" />
             <element signature="method#tryReplicate#0;class#Player#0" expanded="false" />
             <element signature="method#tryReplicateRandom#0;class#Player#0" expanded="false" />
