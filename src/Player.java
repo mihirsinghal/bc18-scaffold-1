@@ -11,6 +11,7 @@ public class Player {
 	static int earthWidth, marsWidth, earthHeight, marsHeight;
 	static Random rand = new Random(0xbeef);
 	static ArrayList<Direction> directions = new ArrayList<Direction>();
+	static ResearchInfo researchInfo;
 
 	public static void main(String[] args) {
 		// You can use other files in this directory, and in subdirectories.
@@ -44,6 +45,7 @@ public class Player {
 
 		earthMap = gc.startingMap(Planet.Earth);
 		marsMap = gc.startingMap(Planet.Mars);
+		researchInfo = gc.researchInfo();
 
 		earthWidth = (int) earthMap.getWidth();
 		marsWidth = (int) marsMap.getWidth();
@@ -53,10 +55,18 @@ public class Player {
 		long[][] earthKarb = new long[earthHeight][earthWidth];
 		long[][] marsKarb = new long[marsHeight][marsWidth];
 
+		if(gc.team() == Team.Red) processResearch();
+
 		while (true) {
 			if(gc.round() % 100 == 0) {
 				System.out.println("Round: " + gc.round());
 				System.out.println("K15: " + gc.karbonite());
+				for(UnitType type : UnitType.values()) {
+					System.out.println(type + " at level " + researchInfo.getLevel(type));
+				}
+				if(researchInfo.hasNextInQueue())
+					System.out.println("next up: " + researchInfo.nextInQueue());
+				// System.out.println(researchInfo.toJson());
 			}
 			// VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
 
@@ -237,5 +247,37 @@ public class Player {
 		Collections.shuffle(directions, rand);
 	}
 
+	static void processResearch() {
+		// Using these build tree each time is decent
+		// We can try adding upgrades based on current units
+		// But that's not too important right now
+		gc.queueResearch(UnitType.Worker); // 25 - additional karbonite harvesting
+		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
+		gc.queueResearch(UnitType.Rocket); // 100 - allows us to build rockets
+		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
+		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
+		// with Basics, Total: 350
+		gc.queueResearch(UnitType.Knight); // 25 - better armor
+		gc.queueResearch(UnitType.Knight); // 75 - better armor
+		// use javelin if we want to continue creating knights
+		// but I think that we'd be better off rushing Ranger
+		/*
+		gc.queueResearch(UnitType.Knight); // 150 - unlocks javelin
+		*/
+		// with Exploration, Total: 450
+		gc.queueResearch(UnitType.Ranger); // 25 - less movement cooldown
+		gc.queueResearch(UnitType.Ranger); // 100 - increased vision
+		gc.queueResearch(UnitType.Ranger); // 200 - unlimited range
+		// with long-range sniping, Total: 775
+		// current strategy is to build just enough tanky knights to explore the map
+		// then use use knights, but mainly rangers, for damage on any target
+		// alternatives:
+		// mage tree for high DPS melee combat
+		/*
+		gc.queueResearch(UnitType.Mage); // 25 - more damage for mages
+		gc.queueResearch(UnitType.Mage); // 75 - more damage for mages
+		gc.queueResearch(UnitType.Mage); // 100 - more damage for mages
+		*/
+	}
 
 }
