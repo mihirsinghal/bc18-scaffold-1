@@ -119,15 +119,21 @@ public class Player {
 
 	static void defaultEarthWorkerAction(Unit unit) {
 
-		tryMoveRandom(unit);
-		tryReplicateRandom(unit);
+		for(Direction dir : directions) {
+			if(tryHarvest(unit, dir)) return;
+		}
+		if(tryMoveRandom(unit)) return;
+		if(tryReplicateRandom(unit)) return;
 
 	}
 
 	static boolean tryHarvest(Unit unit, Direction direction) { // id must be id of worker
 		int id = unit.id();
 		if (gc.canHarvest(id, direction)) {
+			long k15 = gc.karbonite();
 			gc.harvest(id, direction);
+			k15 = gc.karbonite() - k15;
+			System.out.println("Harvested: " + k15 + " K15!");
 			return true;
 		} else {
 			return false;
