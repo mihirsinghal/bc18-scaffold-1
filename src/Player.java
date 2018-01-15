@@ -60,6 +60,8 @@ public class Player {
 			}
 			// VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
 
+			if(gc.team() == Team.Red) processResearch();
+
 			// TODO exception handling (try/catch loop)
 			if (gc.planet() == Planet.Earth) {
 				doEarthTurn();
@@ -241,5 +243,38 @@ public class Player {
 		Collections.shuffle(directions, rand);
 	}
 
+	static void processResearch() {
+		if(gc.round() > 1) return;
+		// Using these build tree each time is decent
+		// We can try adding upgrades based on current units
+		// But that's not too important right now
+		gc.queueResearch(UnitType.Worker); // 25 - additional karbonite harvesting
+		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
+		gc.queueResearch(UnitType.Rocket); // 100 - allows us to build rockets
+		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
+		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
+		// with Basics, Total: 350
+		gc.queueResearch(UnitType.Knight); // 25 - better armor
+		gc.queueResearch(UnitType.Knight); // 75 - better armor
+		// use javelin if we want to continue creating knights
+		// but I think that we'd be better off rushing Ranger
+		/*
+		gc.queueResearch(UnitType.Knight); // 150 - unlocks javelin
+		*/
+		// with Exploration, Total: 450
+		gc.queueResearch(UnitType.Ranger); // 25 - less movement cooldown
+		gc.queueResearch(UnitType.Ranger); // 100 - increased vision
+		gc.queueResearch(UnitType.Ranger); // 200 - unlimited range
+		// with long-range sniping, Total: 775
+		// current strategy is to build just enough tanky knights to explore the map
+		// then use use knights, but mainly rangers, for damage on any target
+		// alternatives:
+		// mage tree for high DPS melee combat
+		/*
+		gc.queueResearch(UnitType.Mage); // 25 - more damage for mages
+		gc.queueResearch(UnitType.Mage); // 75 - more damage for mages
+		gc.queueResearch(UnitType.Mage); // 100 - more damage for mages
+		*/
+	}
 
 }
