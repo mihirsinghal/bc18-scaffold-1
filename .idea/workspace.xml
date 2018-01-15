@@ -2,7 +2,71 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95ed8e66-ca27-4350-a6d3-4cea8fff06b2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/battlecode-manager/scrimmage.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/battlecode-maps/julia.bc18t" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/battlecode-manager/battlecode_cli.py" afterPath="$PROJECT_DIR$/battlecode-manager/battlecode_cli.py" />
+      <change beforePath="$PROJECT_DIR$/battlecode-manager/player_plain.py" afterPath="$PROJECT_DIR$/battlecode-manager/player_plain.py" />
+      <change beforePath="$PROJECT_DIR$/battlecode-manager/player_sandboxed.py" afterPath="$PROJECT_DIR$/battlecode-manager/player_sandboxed.py" />
+      <change beforePath="$PROJECT_DIR$/battlecode-manager/server.py" afterPath="$PROJECT_DIR$/battlecode-manager/server.py" />
+      <change beforePath="$PROJECT_DIR$/battlecode-manager/start_docker.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/battlecode-manager/web/run.html" afterPath="$PROJECT_DIR$/battlecode-manager/web/run.html" />
+      <change beforePath="$PROJECT_DIR$/battlecode/c/include/bc.h" afterPath="$PROJECT_DIR$/battlecode/c/include/bc.h" />
+      <change beforePath="$PROJECT_DIR$/battlecode/c/include/bc.i" afterPath="$PROJECT_DIR$/battlecode/c/include/bc.i" />
+      <change beforePath="$PROJECT_DIR$/battlecode/c/lib/libbattlecode-darwin.a" afterPath="$PROJECT_DIR$/battlecode/c/lib/libbattlecode-darwin.a" />
+      <change beforePath="$PROJECT_DIR$/battlecode/c/lib/libbattlecode-linux.a" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/battlecode/c/lib/libbattlecode-win32.lib" afterPath="$PROJECT_DIR$/battlecode/c/lib/libbattlecode-win32.lib" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/AsteroidPattern.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/AsteroidPattern.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/AsteroidPattern.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/AsteroidPattern.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/AsteroidStrike.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/AsteroidStrike.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/AsteroidStrike.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/AsteroidStrike.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/GameController.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/GameController.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/GameController.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/GameController.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/GameMap.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/GameMap.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/GameMap.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/GameMap.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/Location.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/Location.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/Location.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/Location.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/MapLocation.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/MapLocation.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/MapLocation.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/MapLocation.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/PlanetMap.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/PlanetMap.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/PlanetMap.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/PlanetMap.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/Player.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/Player.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/Player.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/Player.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/ResearchInfo.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/ResearchInfo.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/ResearchInfo.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/ResearchInfo.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/RocketLanding.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/RocketLanding.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/RocketLanding.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/RocketLanding.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/RocketLandingInfo.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/RocketLandingInfo.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/RocketLandingInfo.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/RocketLandingInfo.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/StartTurnMessage.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/StartTurnMessage.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/StartTurnMessage.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/StartTurnMessage.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/Unit.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/Unit.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/Unit.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/Unit.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecMapLocation.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecMapLocation.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecMapLocation.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecMapLocation.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecRocketLanding.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecRocketLanding.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecRocketLanding.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecRocketLanding.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecUnit.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecUnit.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecUnit.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecUnit.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecUnitID.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecUnitID.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecUnitID.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecUnitID.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecUnitType.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecUnitType.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/VecUnitType.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/VecUnitType.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/Veci32.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/Veci32.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/Veci32.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/Veci32.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/bc.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/bc.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/bc.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/bc.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/bcJNI.class" afterPath="$PROJECT_DIR$/battlecode/java/bc/bcJNI.class" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/bcJNI.java" afterPath="$PROJECT_DIR$/battlecode/java/bc/bcJNI.java" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/bc_wrap.c" afterPath="$PROJECT_DIR$/battlecode/java/bc/bc_wrap.c" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/bc_wrap.o" afterPath="$PROJECT_DIR$/battlecode/java/bc/bc_wrap.o" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/libbattlecode-java-darwin.so" afterPath="$PROJECT_DIR$/battlecode/java/bc/libbattlecode-java-darwin.so" />
+      <change beforePath="$PROJECT_DIR$/battlecode/java/bc/libbattlecode-java-linux.so" afterPath="$PROJECT_DIR$/battlecode/java/bc/libbattlecode-java-linux.so" />
+      <change beforePath="$PROJECT_DIR$/battlecode/python/battlecode/__init__.py" afterPath="$PROJECT_DIR$/battlecode/python/battlecode/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/battlecode/python/battlecode/darwin/_bc.abi3.so" afterPath="$PROJECT_DIR$/battlecode/python/battlecode/darwin/_bc.abi3.so" />
+      <change beforePath="$PROJECT_DIR$/battlecode/python/battlecode/linux/_bc.abi3.so" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/battlecode/python/battlecode/win32/_bc.pyd" afterPath="$PROJECT_DIR$/battlecode/python/battlecode/win32/_bc.pyd" />
+      <change beforePath="$PROJECT_DIR$/examplefuncsplayer-python/run.py" afterPath="$PROJECT_DIR$/examplefuncsplayer-python/run.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +81,8 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="192" column="21" lean-forward="false" selection-start-line="192" selection-start-column="21" selection-end-line="192" selection-end-column="21" />
+            <state relative-caret-position="562">
+              <caret line="193" column="5" lean-forward="false" selection-start-line="193" selection-start-column="5" selection-end-line="193" selection-end-column="5" />
               <folding>
                 <element signature="e#327#338#0" expanded="true" />
                 <element signature="e#5470#5471#0" expanded="true" />
@@ -245,8 +309,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="192" column="21" lean-forward="false" selection-start-line="192" selection-start-column="21" selection-end-line="192" selection-end-column="21" />
+        <state relative-caret-position="562">
+          <caret line="193" column="5" lean-forward="false" selection-start-line="193" selection-start-column="5" selection-end-line="193" selection-end-column="5" />
           <folding>
             <element signature="e#327#338#0" expanded="true" />
             <element signature="e#5470#5471#0" expanded="true" />
