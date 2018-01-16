@@ -12,6 +12,7 @@ public class Player {
 	static Random rand = new Random(0xbeef);
 	static ArrayList<Direction> directions = new ArrayList<Direction>();
 	static ResearchInfo researchInfo;
+	static AsteroidPattern asteroidPattern;
 
 	public static void main(String[] args) {
 		// You can use other files in this directory, and in subdirectories.
@@ -46,6 +47,7 @@ public class Player {
 		earthMap = gc.startingMap(Planet.Earth);
 		marsMap = gc.startingMap(Planet.Mars);
 		researchInfo = gc.researchInfo();
+		asteroidPattern = gc.asteroidPattern();
 
 		earthWidth = (int) earthMap.getWidth();
 		marsWidth = (int) marsMap.getWidth();
@@ -54,6 +56,24 @@ public class Player {
 
 		long[][] earthKarb = new long[earthHeight][earthWidth];
 		long[][] marsKarb = new long[marsHeight][marsWidth];
+		long[][] marsTime = new long[marsHeight][marsWidth];
+
+		for(int i = 0; i < earthHeight; i++) {
+			for(int j = 0; j < earthWidth; j++) {
+				MapLocation curLoc = new MapLocation(Planet.Earth, i, j);
+				earthKarb[i][j] = earthMap.initialKarboniteAt(curLoc);
+			}
+		}
+
+		for(long round = 1; round <= 1000; round++) {
+			if(asteroidPattern.hasAsteroid(round)) {
+				AsteroidStrike strike = asteroidPattern.asteroid(round);
+				MapLocation curLoc = strike.getLocation();
+				int x = curLoc.getX(), y = curLoc.getY();
+				marsKarb[x][y] = strike.getKarbonite();
+				marsTime[x][y] = round;
+			}
+		}
 
 		if(gc.team() == Team.Red) processResearch();
 
@@ -83,7 +103,7 @@ public class Player {
 		}
 	}
 
-	static void doEarthTurn() { // TODO at end of turn all workers should harvest if possible
+	static void doEarthTurn() {
 
 		if (gc.round() == 1) {
 
