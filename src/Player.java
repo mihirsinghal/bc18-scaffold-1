@@ -70,8 +70,6 @@ public class Player {
 			}
 			// VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
 
-			if(gc.team() == Team.Red) processResearch();
-
 			// TODO exception handling (try/catch loop)
 			if (gc.planet() == Planet.Earth) {
 				doEarthTurn();
