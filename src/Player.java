@@ -12,6 +12,7 @@ public class Player {
 	static Random rand = new Random(0xbeef);
 	static ArrayList<Direction> directions = new ArrayList<Direction>();
 	static ResearchInfo researchInfo;
+	static AsteroidPattern asteroidPattern;
 
 	public static void main(String[] args) {
 		// You can use other files in this directory, and in subdirectories.
@@ -46,6 +47,7 @@ public class Player {
 		earthMap = gc.startingMap(Planet.Earth);
 		marsMap = gc.startingMap(Planet.Mars);
 		researchInfo = gc.researchInfo();
+		asteroidPattern = gc.asteroidPattern();
 
 		earthWidth = (int) earthMap.getWidth();
 		marsWidth = (int) marsMap.getWidth();
@@ -54,23 +56,41 @@ public class Player {
 
 		long[][] earthKarb = new long[earthHeight][earthWidth];
 		long[][] marsKarb = new long[marsHeight][marsWidth];
+		long[][] marsTime = new long[marsHeight][marsWidth];
+
+		for(int i = 0; i < earthHeight; i++) {
+			for(int j = 0; j < earthWidth; j++) {
+				MapLocation curLoc = new MapLocation(Planet.Earth, i, j);
+				earthKarb[i][j] = earthMap.initialKarboniteAt(curLoc);
+			}
+		}
+
+		for(long round = 1; round <= 1000; round++) {
+			if(asteroidPattern.hasAsteroid(round)) {
+				AsteroidStrike strike = asteroidPattern.asteroid(round);
+				MapLocation curLoc = strike.getLocation();
+				int x = curLoc.getX(), y = curLoc.getY();
+				marsKarb[x][y] = strike.getKarbonite();
+				marsTime[x][y] = round;
+			}
+		}
 
 		if(gc.team() == Team.Red) processResearch();
 
 		while (true) {
 			if(gc.round() % 100 == 0) {
 				System.out.println("Round: " + gc.round());
-				System.out.println("K15: " + gc.karbonite());
+				System.out.println("Karbonite: " + gc.karbonite());
+				System.out.println("Research");
+				System.out.println("--------");
 				for(UnitType type : UnitType.values()) {
 					System.out.println(type + " at level " + researchInfo.getLevel(type));
 				}
 				if(researchInfo.hasNextInQueue())
-					System.out.println("next up: " + researchInfo.nextInQueue());
-				// System.out.println(researchInfo.toJson());
+					System.out.println("Next up: " + researchInfo.nextInQueue());
+				System.out.println(researchInfo.toJson());
 			}
 			// VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
-
-			if(gc.team() == Team.Red) processResearch();
 
 			// TODO exception handling (try/catch loop)
 			if (gc.planet() == Planet.Earth) {
@@ -85,7 +105,7 @@ public class Player {
 		}
 	}
 
-	static void doEarthTurn() { // TODO at end of turn all workers should harvest if possible
+	static void doEarthTurn() {
 
 		if (gc.round() == 1) {
 
@@ -182,10 +202,10 @@ public class Player {
 	static boolean tryHarvest(Unit unit, Direction direction) { // id must be id of worker
 		int id = unit.id();
 		if (gc.canHarvest(id, direction)) {
-			long k15 = gc.karbonite();
+			long amt = gc.karbonite();
 			gc.harvest(id, direction);
-			k15 = gc.karbonite() - k15;
-			System.out.println("Harvested: " + k15 + " K15!");
+			amt = gc.karbonite() - amt;
+			// System.out.println("Harvested " + amt + " Karbonite!");
 			return true;
 		} else {
 			return false;

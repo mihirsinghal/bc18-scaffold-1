@@ -17,9 +17,9 @@ fi
 echo "=== STARTING THE MANAGER (no docker) ==="
 echo "=== ensuring dependencies ==="
 mtput setaf 5
-echo "$ pip3 install --user cffi eel tqdm werkzeug psutil"
+echo "$ pip3.6 install --user cffi eel tqdm werkzeug psutil"
 mtput sgr0
-pip3 install --user cffi eel tqdm werkzeug psutil
+pip3.6 install --user cffi eel tqdm werkzeug psutil
 RESULT=$?
 if [ $RESULT -ne 0 ]; then
     echo "Warning: pip install failed!"
@@ -29,6 +29,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export PYTHONPATH="$DIR/battlecode/python:$PYTHONPATH"
 export NODOCKER=1
 mtput setaf 5
-echo "$ python3 $DIR/battlecode-manager/gui.py"
+echo "$ python3.6 $DIR/battlecode-manager/gui.py"
 mtput sgr0
-python3 $DIR/battlecode-manager/gui.py
+python3.6 $DIR/battlecode-manager/gui.py
