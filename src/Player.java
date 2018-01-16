@@ -13,6 +13,7 @@ public class Player {
 	static ArrayList<Direction> directions = new ArrayList<Direction>();
 	static ResearchInfo researchInfo;
 	static AsteroidPattern asteroidPattern;
+	static long[][] earthKarb, marsKarb, marsTime;
 
 	public static void main(String[] args) {
 		// You can use other files in this directory, and in subdirectories.
@@ -54,9 +55,9 @@ public class Player {
 		earthHeight = (int) earthMap.getHeight();
 		marsHeight = (int) marsMap.getHeight();
 
-		long[][] earthKarb = new long[earthHeight][earthWidth];
-		long[][] marsKarb = new long[marsHeight][marsWidth];
-		long[][] marsTime = new long[marsHeight][marsWidth];
+		earthKarb = new long[earthHeight][earthWidth];
+		marsKarb = new long[marsHeight][marsWidth];
+		marsTime = new long[marsHeight][marsWidth];
 
 		for(int i = 0; i < earthHeight; i++) {
 			for(int j = 0; j < earthWidth; j++) {
@@ -90,7 +91,6 @@ public class Player {
 					System.out.println("Next up: " + researchInfo.nextInQueue());
 				System.out.println(researchInfo.toJson());
 			}
-			// VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
 
 			// TODO exception handling (try/catch loop)
 			if (gc.planet() == Planet.Earth) {
