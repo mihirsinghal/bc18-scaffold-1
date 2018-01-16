@@ -80,13 +80,15 @@ public class Player {
 		while (true) {
 			if(gc.round() % 100 == 0) {
 				System.out.println("Round: " + gc.round());
-				System.out.println("K15: " + gc.karbonite());
+				System.out.println("Karbonite: " + gc.karbonite());
+				System.out.println("Research");
+				System.out.println("--------");
 				for(UnitType type : UnitType.values()) {
 					System.out.println(type + " at level " + researchInfo.getLevel(type));
 				}
 				if(researchInfo.hasNextInQueue())
-					System.out.println("next up: " + researchInfo.nextInQueue());
-				// System.out.println(researchInfo.toJson());
+					System.out.println("Next up: " + researchInfo.nextInQueue());
+				System.out.println(researchInfo.toJson());
 			}
 			// VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
 
@@ -200,10 +202,10 @@ public class Player {
 	static boolean tryHarvest(Unit unit, Direction direction) { // id must be id of worker
 		int id = unit.id();
 		if (gc.canHarvest(id, direction)) {
-			long k15 = gc.karbonite();
+			long amt = gc.karbonite();
 			gc.harvest(id, direction);
-			k15 = gc.karbonite() - k15;
-			System.out.println("Harvested: " + k15 + " K15!");
+			amt = gc.karbonite() - amt;
+			// System.out.println("Harvested " + amt + " Karbonite!");
 			return true;
 		} else {
 			return false;
