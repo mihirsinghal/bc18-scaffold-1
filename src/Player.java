@@ -14,6 +14,8 @@ public class Player {
 	static ResearchInfo researchInfo;
 	static AsteroidPattern asteroidPattern;
 	static long[][] earthKarb, marsKarb, marsTime;
+	static long totalRocketCost;
+	static ArrayList<MapLocation> blueprintLocations;
 
 	public static void main(String[] args) {
 		// You can use other files in this directory, and in subdirectories.
@@ -47,7 +49,6 @@ public class Player {
 
 		earthMap = gc.startingMap(Planet.Earth);
 		marsMap = gc.startingMap(Planet.Mars);
-		researchInfo = gc.researchInfo();
 		asteroidPattern = gc.asteroidPattern();
 
 		earthWidth = (int) earthMap.getWidth();
@@ -58,6 +59,8 @@ public class Player {
 		earthKarb = new long[earthHeight][earthWidth];
 		marsKarb = new long[marsHeight][marsWidth];
 		marsTime = new long[marsHeight][marsWidth];
+
+		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket);
 
 		for(int i = 0; i < earthHeight; i++) {
 			for(int j = 0; j < earthWidth; j++) {
@@ -79,6 +82,8 @@ public class Player {
 		if(gc.team() == Team.Red) processResearch();
 
 		while (true) {
+
+			researchInfo = gc.researchInfo();
 			if(gc.round() % 100 == 0) {
 				System.out.println("Round: " + gc.round());
 				System.out.println("Karbonite: " + gc.karbonite());
@@ -119,6 +124,17 @@ public class Player {
 		} else {
 
 			VecUnit units = gc.myUnits();
+
+			blueprintLocations = new ArrayList<MapLocation>();
+			for (int i = 0; i < units.size(); i++) {
+				Unit unit = units.get(i);
+				if ((unit.unitType() == UnitType.Factory) || (unit.unitType() == UnitType.Rocket)) {
+					if (unit.structureIsBuilt() == 0) {
+						blueprintLocations.add(unit.location().mapLocation());
+					}
+				}
+			}
+
 			for (int i = 0; i < units.size(); i++) {
 				Unit unit = units.get(i);
 
@@ -278,8 +294,8 @@ public class Player {
 		// We can try adding upgrades based on current units
 		// But that's not too important right now
 		gc.queueResearch(UnitType.Worker); // 25 - additional karbonite harvesting
-		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
 		gc.queueResearch(UnitType.Rocket); // 100 - allows us to build rockets
+		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
 		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
 		gc.queueResearch(UnitType.Worker); // 75 - faster building contruction and healing
 		// with Basics, Total: 350

@@ -18,11 +18,13 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="59" column="8" lean-forward="false" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
+            <state relative-caret-position="275">
+              <caret line="132" column="78" lean-forward="false" selection-start-line="132" selection-start-column="78" selection-end-line="132" selection-end-column="78" />
               <folding>
-                <element signature="e#0#8202#0" expanded="true" />
+                <element signature="e#0#8690#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="e#7038#7039#0" expanded="true" />
+                <element signature="e#7082#7083#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,7 +89,38 @@
             <path>
               <item name="bc18-scaffold-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="bc18-scaffold-1" type="462c0819:PsiDirectoryNode" />
+              <item name="battlecode" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bc18-scaffold-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bc18-scaffold-1" type="462c0819:PsiDirectoryNode" />
+              <item name="battlecode" type="462c0819:PsiDirectoryNode" />
+              <item name="python" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bc18-scaffold-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bc18-scaffold-1" type="462c0819:PsiDirectoryNode" />
+              <item name="battlecode" type="462c0819:PsiDirectoryNode" />
+              <item name="python" type="462c0819:PsiDirectoryNode" />
+              <item name="battlecode" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bc18-scaffold-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bc18-scaffold-1" type="462c0819:PsiDirectoryNode" />
+              <item name="battlecode" type="462c0819:PsiDirectoryNode" />
+              <item name="python" type="462c0819:PsiDirectoryNode" />
+              <item name="battlecode" type="462c0819:PsiDirectoryNode" />
+              <item name="darwin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bc18-scaffold-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bc18-scaffold-1" type="462c0819:PsiDirectoryNode" />
               <item name="examplefuncsplayer-java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bc18-scaffold-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bc18-scaffold-1" type="462c0819:PsiDirectoryNode" />
+              <item name="examplefuncsplayer-python" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bc18-scaffold-1" type="b2602c69:ProjectViewProjectNode" />
@@ -263,11 +296,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="59" column="8" lean-forward="false" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
+        <state relative-caret-position="275">
+          <caret line="132" column="78" lean-forward="false" selection-start-line="132" selection-start-column="78" selection-end-line="132" selection-end-column="78" />
           <folding>
-            <element signature="e#0#8202#0" expanded="true" />
+            <element signature="e#0#8690#0" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="e#7038#7039#0" expanded="true" />
+            <element signature="e#7082#7083#0" expanded="true" />
           </folding>
         </state>
       </provider>
