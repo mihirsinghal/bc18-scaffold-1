@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="95ed8e66-ca27-4350-a6d3-4cea8fff06b2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/bc18-scaffold-1.iml" afterPath="$PROJECT_DIR$/bc18-scaffold-1.iml" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,12 +17,12 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="149" column="22" lean-forward="false" selection-start-line="149" selection-start-column="22" selection-end-line="149" selection-end-column="22" />
+            <state relative-caret-position="396">
+              <caret line="277" column="69" lean-forward="true" selection-start-line="277" selection-start-column="69" selection-end-line="277" selection-end-column="69" />
               <folding>
                 <element signature="e#327#338#0" expanded="true" />
-                <element signature="e#5521#5522#0" expanded="true" />
-                <element signature="e#5565#5566#0" expanded="true" />
+                <element signature="e#5971#5972#0" expanded="true" />
+                <element signature="e#6015#6016#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -247,12 +245,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="149" column="22" lean-forward="false" selection-start-line="149" selection-start-column="22" selection-end-line="149" selection-end-column="22" />
+        <state relative-caret-position="396">
+          <caret line="277" column="69" lean-forward="true" selection-start-line="277" selection-start-column="69" selection-end-line="277" selection-end-column="69" />
           <folding>
             <element signature="e#327#338#0" expanded="true" />
-            <element signature="e#5521#5522#0" expanded="true" />
-            <element signature="e#5565#5566#0" expanded="true" />
+            <element signature="e#5971#5972#0" expanded="true" />
+            <element signature="e#6015#6016#0" expanded="true" />
           </folding>
         </state>
       </provider>
