@@ -24,28 +24,27 @@ public class Player {
 
 	public static void main(String[] args) {
 
-		// MapLocation is a data structure you'll use a lot.
-		// MapLocation loc = new MapLocation(Planet.Earth, 10, 20);
-		// System.out.println("loc: " + loc + ", one step to the Northwest: " + loc.add(Direction.Northwest));
-		// System.out.println("loc sd: " + loc.getX());
-
 
 		Collections.addAll(directions, Direction.values()); // note: this includes center
 
-		// prioritize this order for BFS
-		// directions.add(Direction.North);
-		// directions.add(Direction.South);
-		// directions.add(Direction.East);
-		// directions.add(Direction.West);
-		// directions.add(Direction.Northeast);
-		// directions.add(Direction.Northwest);
-		// directions.add(Direction.Southeast);
-		// directions.add(Direction.Southwest);
+		/*
+		prioritize this order for BFS
+		directions.add(Direction.North);
+		directions.add(Direction.South);
+		directions.add(Direction.East);
+		directions.add(Direction.West);
+		directions.add(Direction.Northeast);
+		directions.add(Direction.Northwest);
+		directions.add(Direction.Southeast);
+		directions.add(Direction.Southwest);
+		*/
 
-		// NSEW.add(Direction.North);
-		// NSEW.add(Direction.South);
-		// NSEW.add(Direction.East);
-		// NSEW.add(Direction.West);
+		/*
+		NSEW.add(Direction.North);
+		NSEW.add(Direction.South);
+		NSEW.add(Direction.East);
+		NSEW.add(Direction.West);
+		*/
 
 		// Connect to the manager, starting the game
 		gc = new GameController();
@@ -67,14 +66,15 @@ public class Player {
 
 		for (int i = 0; i < earthWidth; i++) {
 			for (int j = 0; j < earthHeight; j++) {
-				MapLocation curLoc = new MapLocation(Planet.Earth, i, j);
-				earthKarb[i][j] = earthMap.initialKarboniteAt(curLoc);
+				MapLocation cur = new MapLocation(Planet.Earth, i, j);
+				earthKarb[i][j] = earthMap.initialKarboniteAt(cur);
 			}
 		}
 
 		if (gc.planet() == Planet.Earth) {
 			calculateBFS();
 			determinePaths();
+			processResearch();
 		}
 
 		for (long round = 1; round <= 1000; round++) {
@@ -87,11 +87,11 @@ public class Player {
 			}
 		}
 
-		processResearch();
 
 		while (true) {
 
 			researchInfo = gc.researchInfo();
+			/*
 			if (gc.round() % 100 == 0) {
 				System.out.println("Round: " + gc.round());
 				System.out.println("Karbonite: " + gc.karbonite());
@@ -104,6 +104,7 @@ public class Player {
 					System.out.println("Next up: " + researchInfo.nextInQueue());
 				// System.out.println(researchInfo.toJson());
 			}
+			*/
 
 			// TODO exception handling (try/catch loop)
 			if (gc.planet() == Planet.Earth) {
@@ -117,6 +118,90 @@ public class Player {
 			gc.nextTurn();
 		}
 	}
+
+	static void doEarthTurn() {
+
+		VecUnit units = gc.myUnits();
+
+		blueprintLocations = new ArrayList<MapLocation>();
+		for (int i = 0; i < units.size(); i++) {
+			Unit unit = units.get(i);
+			if ((unit.unitType() == UnitType.Factory) || (unit.unitType() == UnitType.Rocket)) {
+				if (unit.structureIsBuilt() == 0) {
+					blueprintLocations.add(unit.location().mapLocation());
+				}
+			}
+		}
+
+		for (int i = 0; i < units.size(); i++) {
+			Unit unit = units.get(i);
+
+			switch (unit.unitType()) {
+
+				case Worker:
+					defaultEarthWorkerAction(unit);
+					break;
+				case Knight:
+					break;
+				case Ranger:
+					break;
+				case Mage:
+					break;
+				case Healer:
+					break;
+				case Factory:
+					break;
+				case Rocket:
+					break;
+				default:
+					break;
+
+			}
+
+			if (gc.getTimeLeftMs() < 50) {
+				break;
+			}
+
+		}
+
+	}
+
+	static void doMarsTurn() {
+
+		VecUnit units = gc.myUnits();
+		for (int i = 0; i < units.size(); i++) {
+			Unit unit = units.get(i);
+
+			switch (unit.unitType()) {
+
+				case Worker:
+					defaultEarthWorkerAction(unit); // TODO use the asteroid pattern
+					break;
+				case Knight:
+					break;
+				case Ranger:
+					break;
+				case Mage:
+					break;
+				case Healer:
+					break;
+				case Factory:
+					break;
+				case Rocket:
+					break;
+				default:
+					break;
+
+			}
+
+			if (gc.getTimeLeftMs() < 50) {
+				break;
+			}
+
+		}
+
+	}
+
 
 	static void calculateBFS() {
 		dist = new int[earthWidth][earthHeight];
@@ -187,15 +272,16 @@ public class Player {
 		for (int j = earthHeight - 1; j >= 0; j--) {
 			for (int i = 0; i < earthWidth; i++) {
 				Direction d = trace[i][j];
-				if (d == Direction.North) System.out.print("| ");
-				else if (d == Direction.Northwest) System.out.print("\\ ");
-				else if (d == Direction.Northeast) System.out.print("/ ");
-				else if (d == Direction.East) System.out.print("- ");
-				else if (d == Direction.Southeast) System.out.print("\\ ");
-				else if (d == Direction.Southwest) System.out.print("/ ");
-				else if (d == Direction.South) System.out.print("| ");
-				else if (d == Direction.West) System.out.print("- ");
-				else System.out.print("  ");
+				if (d == Direction.North) System.out.print("^");
+				else if (d == Direction.South) System.out.print("v");
+				else if (d == Direction.East) System.out.print(">");
+				else if (d == Direction.West) System.out.print("<");
+				else if (d == Direction.Northwest) System.out.print("\\");
+				else if (d == Direction.Southeast) System.out.print("\\");
+				else if (d == Direction.Northeast) System.out.print("/");
+				else if (d == Direction.Southwest) System.out.print("/");
+				else System.out.print("*");
+				System.out.print(" ");
 			}
 			System.out.println();
 		}
@@ -210,19 +296,16 @@ public class Player {
 		}
 		for (int i = 0; i < earthWidth; i++) {
 			for (int j = 0; j < earthHeight; j++) {
-				if (wanted(i, j) && dist[i][j] < maxDist) {
-					near[-dist[i][j]].add(1000 * i + j);
+				// condition for if we want to collect from this cell
+				// for now we will get any cell that has karbonite with maxDist
+				if (wanted(i, j) && dist[i][j] >= 0 && dist[i][j] < maxDist) {
+					near[dist[i][j]].add(1000 * i + j);
 				}
 			}
 		}
-		// for(int i = 0; i < earthWidth; i++) {
-		// for(int j = 0; j < earthHeight; j++) {
 		for (int d = 0; d < maxDist; d++) {
 			for (int pos : near[d]) {
 				int i = pos / 1000, j = pos % 1000;
-				// condition for if we want to collect from this cell
-				// for now we will get any cell that has karbonite
-				// if(wanted(i, j)) {
 				MapLocation cur = new MapLocation(Planet.Earth, i, j);
 				while (true) {
 					int x = cur.getX(), y = cur.getY();
@@ -235,7 +318,6 @@ public class Player {
 					System.out.println("(" + px + ", " + py + ") --> (" + x + ", " + y + ")");
 					cur = par;
 				}
-				// }
 			}
 		}
 	}
@@ -251,115 +333,22 @@ public class Player {
 		if (go[x][y].size() == 0) return;
 		for (Direction dir : go[x][y]) {
 			if (gc.canReplicate(id, dir)) {
-				System.out.println("unit " + id + " at x = " + x + " y = " + y);
+				System.out.println("--- unit " + id + " at x = " + x + " y = " + y);
 				System.out.println("there are " + go[x][y].size() + " branches here!");
 				System.out.println("replicated in dir " + dir);
 				gc.replicate(id, dir);
 			}
 		}
-		// if ((unit.movementHeat() < 10) && gc.canMove(id, dir)) {
-		// 	gc.moveRobot(id, dir);
-		// }
-	}
-
-	static void doEarthTurn() {
-
-		if (gc.round() == 1) {
-
-			VecUnit units = gc.myUnits();
-			for (int i = 0; i < units.size(); i++) {
-				Unit unit = units.get(i);
-				// assert unit.unitType() == UnitType.Worker;
-				tryReplicateRandom(unit); // assumes that there are only workers to start
-			}
-
-		} else {
-
-			VecUnit units = gc.myUnits();
-
-			blueprintLocations = new ArrayList<MapLocation>();
-			for (int i = 0; i < units.size(); i++) {
-				Unit unit = units.get(i);
-				if ((unit.unitType() == UnitType.Factory) || (unit.unitType() == UnitType.Rocket)) {
-					if (unit.structureIsBuilt() == 0) {
-						blueprintLocations.add(unit.location().mapLocation());
-					}
-				}
-			}
-
-			for (int i = 0; i < units.size(); i++) {
-				Unit unit = units.get(i);
-
-				switch (unit.unitType()) {
-
-					case Worker:
-						defaultEarthWorkerAction(unit);
-						break;
-					case Knight:
-						break;
-					case Ranger:
-						break;
-					case Mage:
-						break;
-					case Healer:
-						break;
-					case Factory:
-						break;
-					case Rocket:
-						break;
-					default:
-						break;
-
-				}
-
-			}
-
+		/*
+		if ((unit.movementHeat() < 10) && gc.canMove(id, dir)) {
+			gc.moveRobot(id, dir);
 		}
-
-	}
-
-	static void doMarsTurn() {
-
-		VecUnit units = gc.myUnits();
-		for (int i = 0; i < units.size(); i++) {
-			Unit unit = units.get(i);
-
-			switch (unit.unitType()) {
-
-				case Worker:
-					defaultEarthWorkerAction(unit); // TODO use the asteroid pattern
-					break;
-				case Knight:
-					break;
-				case Ranger:
-					break;
-				case Mage:
-					break;
-				case Healer:
-					break;
-				case Factory:
-					break;
-				case Rocket:
-					break;
-				default:
-					break;
-
-			}
-
-			if (gc.getTimeLeftMs() < 25) {
-				break;
-			}
-
-		}
-
+		*/
 	}
 
 	static void defaultEarthWorkerAction(Unit unit) {
 
 		if (unit.location().isOnMap()) {
-//			for (Direction dir : directions) {
-//				if (tryHarvest(unit, dir)) break;
-//			}
 			followKarbTest(unit);
 			harvestMax(unit);
 			// tryMoveRandom(unit);
