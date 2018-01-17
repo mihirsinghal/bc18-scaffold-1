@@ -16,6 +16,7 @@ public class Player {
 	static long[][] earthKarb, marsKarb, marsTime;
 	static long totalRocketCost;
 	static ArrayList<MapLocation> blueprintLocations;
+	static ArrayList<Direction>[][] go;
 
 	public static void main(String[] args) {
 		// You can use other files in this directory, and in subdirectories.
@@ -71,8 +72,13 @@ public class Player {
 
 		int[][] dist = new int[earthWidth][earthHeight];
 		Direction[][] trace = new Direction[earthWidth][earthHeight];
-		Arrays.fill(dist, -1);
-		ArrayList<Direction>[][] go = new ArrayList[earthWidth][earthHeight];
+		go = new ArrayList[earthWidth][earthHeight];
+		for(int i = 0; i < earthWidth; i++) {
+			for(int j = 0; j < earthHeight; j++) {
+				dist[i][j] = -1;
+				go[i][j] = new ArrayList<Direction>();
+			}
+		}
 		Queue<MapLocation> bfs = new LinkedList<MapLocation>();
 		int bfsSize = 0;
 
@@ -152,7 +158,8 @@ public class Player {
 
 			// TODO exception handling (try/catch loop)
 			if (gc.planet() == Planet.Earth) {
-				doEarthTurn();
+				followKarbTest();
+				// doEarthTurn();
 			} else {
 				// assert gc.planet() == Planet.Mars;
 				doMarsTurn();
@@ -160,6 +167,23 @@ public class Player {
 
 			// Submit the actions we've done, and wait for our next turn.
 			gc.nextTurn();
+		}
+	}
+
+	static void followKarbTest() {
+		VecUnit units = gc.myUnits();
+		for (int i = 0; i < units.size(); i++) {
+			Unit unit = units.get(i);
+			int id = unit.id();
+			MapLocation loc = unit.location().mapLocation();
+			int x = loc.getX(), y = loc.getY();
+			System.out.println("unit " + id + " at x = " + x + " y = " + y);
+			System.out.println("there are " + go[x][y].size() + " branches here!");
+			if(go[x][y].size() == 0) return;
+			Direction dir = go[x][y].get(0);
+			if ((unit.movementHeat() < 10) && gc.canMove(id, dir)) {
+				gc.moveRobot(id, dir);
+			}
 		}
 	}
 
