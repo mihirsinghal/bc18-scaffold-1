@@ -19,28 +19,14 @@ public class Player {
 	static ArrayList<Direction>[][] go;
 
 	public static void main(String[] args) {
-		// You can use other files in this directory, and in subdirectories.
-		// Extra extra = new Extra(27);
-		// System.out.println(extra.toString());
 
 		// MapLocation is a data structure you'll use a lot.
 		// MapLocation loc = new MapLocation(Planet.Earth, 10, 20);
 		// System.out.println("loc: " + loc + ", one step to the Northwest: " + loc.add(Direction.Northwest));
 		// System.out.println("loc sd: " + loc.getX());
 
-		// One slightly weird thing: some methods are currently static methods on a static class called bc.
-		// This will eventually be fixed :/
 
-		// System.out.println("Opposite of " + Direction.North + ": " + bc.bcDirectionOpposite(Direction.North));
-		// for (Direction dir : Direction.values()) {
-		// 	System.out.println(dir);
-		// }
-
-		for (Direction dir : Direction.values()) {
-			// if (dir != Direction.Center) {
-			directions.add(dir);
-			// }
-		}
+		Collections.addAll(directions, Direction.values()); // note: this includes center
 
 		// Connect to the manager, starting the game
 		gc = new GameController();
