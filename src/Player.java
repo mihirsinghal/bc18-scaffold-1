@@ -332,22 +332,24 @@ public class Player {
 		int id = unit.id();
 		MapLocation loc = unit.location().mapLocation();
 		int x = loc.getX(), y = loc.getY();
-		if (go[x][y].size() == 0) return;
 		for (int i = done[x][y]; i < go[x][y].size(); i++) {
 			Direction dir = go[x][y].get(i);
 			if (gc.canReplicate(id, dir)) {
-				System.out.println("--- unit " + id + " at x = " + x + " y = " + y);
-				System.out.println("there are " + go[x][y].size() + " branches here!");
-				System.out.println("replicated in dir " + dir);
+				// System.out.println("--- unit " + id + " at x = " + x + " y = " + y);
+				// System.out.println("there are " + go[x][y].size() + " branches here!");
+				// System.out.println("replicated in dir " + dir);
 				gc.replicate(id, dir);
 				done[x][y]++;
 			}
 		}
-		/*
-		if ((unit.movementHeat() < 10) && gc.canMove(id, dir)) {
-			gc.moveRobot(id, dir);
+		if (go[x][y].size() == 0) return;
+		if (gc.karboniteAt(loc) > 0) return; // don't move on if there's still karbonite
+		if (done[x][y] == go[x][y].size() - 1) {
+			Direction nxt = go[x][y].get(done[x][y]);
+			if ((unit.movementHeat() < 10) && gc.canMove(id, nxt)) {
+				gc.moveRobot(id, nxt);
+			}
 		}
-		*/
 	}
 
 	static void defaultEarthWorkerAction(Unit unit) {
@@ -367,7 +369,8 @@ public class Player {
 			long amt = gc.karbonite();
 			gc.harvest(id, direction);
 			amt = gc.karbonite() - amt;
-			// System.out.println("Harvested " + amt + " Karbonite!");
+			int x = unit.location().mapLocation().getX(), y = unit.location().mapLocation().getY();
+			System.out.println("(" + x + ", " + y + ") ~ Harvested " + amt + " Karbonite!");
 			return true;
 		} else {
 			return false;
