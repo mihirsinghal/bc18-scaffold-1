@@ -31,9 +31,6 @@ public class Player {
 		// Connect to the manager, starting the game
 		gc = new GameController();
 
-		// Direction is a normal java enum.
-		// Direction[] directions = Direction.values();
-
 		earthMap = gc.startingMap(Planet.Earth);
 		marsMap = gc.startingMap(Planet.Mars);
 		asteroidPattern = gc.asteroidPattern();
