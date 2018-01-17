@@ -20,28 +20,15 @@ public class Player {
 	static ArrayList<Direction>[][] go;
 
 	public static void main(String[] args) {
-		// You can use other files in this directory, and in subdirectories.
-		// Extra extra = new Extra(27);
-		// System.out.println(extra.toString());
 
 		// MapLocation is a data structure you'll use a lot.
 		// MapLocation loc = new MapLocation(Planet.Earth, 10, 20);
 		// System.out.println("loc: " + loc + ", one step to the Northwest: " + loc.add(Direction.Northwest));
 		// System.out.println("loc sd: " + loc.getX());
 
-		// One slightly weird thing: some methods are currently static methods on a static class called bc.
-		// This will eventually be fixed :/
 
-		// System.out.println("Opposite of " + Direction.North + ": " + bc.bcDirectionOpposite(Direction.North));
-		// for (Direction dir : Direction.values()) {
-		// 	System.out.println(dir);
-		// }
+		Collections.addAll(directions, Direction.values()); // note: this includes center
 
-		for (Direction dir : Direction.values()) {
-			// if (dir != Direction.Center) {
-			directions.add(dir);
-			// }
-		}
 		// NSEW.add(Direction.North);
 		// NSEW.add(Direction.South);
 		// NSEW.add(Direction.East);
@@ -66,7 +53,7 @@ public class Player {
 		marsKarb = new long[marsWidth][marsHeight];
 		marsTime = new long[marsWidth][marsHeight];
 
-		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket);
+		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket); // TODO multiply this by the number of connected components on Mars
 
 		for(int i = 0; i < earthWidth; i++) {
 			for(int j = 0; j < earthHeight; j++) {
