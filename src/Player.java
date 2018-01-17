@@ -60,7 +60,7 @@ public class Player {
 		marsKarb = new long[marsWidth][marsHeight];
 		marsTime = new long[marsWidth][marsHeight];
 
-		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket);
+		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket); // TODO multiply this by the number of connected components on Mars
 
 		for(int i = 0; i < earthWidth; i++) {
 			for(int j = 0; j < earthHeight; j++) {
