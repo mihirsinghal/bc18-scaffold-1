@@ -332,7 +332,7 @@ public class Player {
 		int id = unit.id();
 		MapLocation loc = unit.location().mapLocation();
 		int x = loc.getX(), y = loc.getY();
-		for (int i = done[x][y]; i < go[x][y].size(); i++) {
+		for (int i = done[x][y]; i + 1 < go[x][y].size(); i++) { // don't replicate for the last branch
 			Direction dir = go[x][y].get(i);
 			if (gc.canReplicate(id, dir)) {
 				// System.out.println("--- unit " + id + " at x = " + x + " y = " + y);
@@ -348,6 +348,7 @@ public class Player {
 			Direction nxt = go[x][y].get(done[x][y]);
 			if ((unit.movementHeat() < 10) && gc.canMove(id, nxt)) {
 				gc.moveRobot(id, nxt);
+				done[x][y]++;
 			}
 		}
 	}
