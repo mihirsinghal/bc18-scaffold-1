@@ -11,6 +11,7 @@ public class Player {
 	static int earthWidth, marsWidth, earthHeight, marsHeight;
 	static Random rand = new Random(0xbeef);
 	static ArrayList<Direction> directions = new ArrayList<Direction>();
+	// static ArrayList<Direction> NSEW = new ArrayList<Direction>();
 	static ResearchInfo researchInfo;
 	static AsteroidPattern asteroidPattern;
 	static long[][] earthKarb, marsKarb, marsTime;
@@ -27,6 +28,11 @@ public class Player {
 
 
 		Collections.addAll(directions, Direction.values()); // note: this includes center
+
+		// NSEW.add(Direction.North);
+		// NSEW.add(Direction.South);
+		// NSEW.add(Direction.East);
+		// NSEW.add(Direction.West);
 
 		// Connect to the manager, starting the game
 		gc = new GameController();
@@ -52,6 +58,8 @@ public class Player {
 				earthKarb[i][j] = earthMap.initialKarboniteAt(curLoc);
 			}
 		}
+
+		// Start of BFS Code
 
 		int[][] dist = new int[earthWidth][earthHeight];
 		Direction[][] trace = new Direction[earthWidth][earthHeight];
@@ -91,13 +99,6 @@ public class Player {
 			}
 		}
 
-		for(int j = earthHeight - 1; j >= 0; j--) {
-			for(int i = 0; i < earthWidth; i++) {
-				System.out.print(dist[i][j] + " ");
-			}
-			System.out.println();
-		}
-
 		boolean vis[][] = new boolean[earthWidth][earthHeight];
 		for(int i = 0; i < earthWidth; i++) {
 			for(int j = 0; j < earthHeight; j++) {
@@ -120,6 +121,17 @@ public class Player {
 			}
 		}
 
+		// End of BFS Code
+
+		// Distances
+		for(int j = earthHeight - 1; j >= 0; j--) {
+			for(int i = 0; i < earthWidth; i++) {
+				System.out.print(dist[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+		// Visualizing the Directions
 		for(int j = earthHeight - 1; j >= 0; j--) {
 			for(int i = 0; i < earthWidth; i++) {
 				Direction d = trace[i][j];
@@ -142,7 +154,7 @@ public class Player {
 			}
 		}
 
-		if(gc.team() == Team.Red) processResearch();
+		processResearch();
 
 		while (true) {
 
@@ -162,8 +174,7 @@ public class Player {
 
 			// TODO exception handling (try/catch loop)
 			if (gc.planet() == Planet.Earth) {
-				followKarbTest();
-				// doEarthTurn();
+				doEarthTurn();
 			} else {
 				// assert gc.planet() == Planet.Mars;
 				doMarsTurn();
@@ -174,27 +185,22 @@ public class Player {
 		}
 	}
 
-	static void followKarbTest() {
-		VecUnit units = gc.myUnits();
-		for(int i = 0; i < units.size(); i++) {
-			Unit unit = units.get(i);
-			int id = unit.id();
-			MapLocation loc = unit.location().mapLocation();
-			int x = loc.getX(), y = loc.getY();
-			// System.out.println("unit " + id + " at x = " + x + " y = " + y);
-			// System.out.println("there are " + go[x][y].size() + " branches here!");
-			if(go[x][y].size() == 0) return;
-			for(Direction dir : go[x][y]) {
-				if(gc.canReplicate(id, dir)) {
-					System.out.println("unit " + id + " at x = " + x + " y = " + y);
-					System.out.println("replicated in dir " + dir);
-					gc.replicate(id, dir);
-				}
+	static void followKarbTest(Unit unit) {
+		int id = unit.id();
+		MapLocation loc = unit.location().mapLocation();
+		int x = loc.getX(), y = loc.getY();
+		if(go[x][y].size() == 0) return;
+		for(Direction dir : go[x][y]) {
+			if(gc.canReplicate(id, dir)) {
+				System.out.println("unit " + id + " at x = " + x + " y = " + y);
+				System.out.println("there are " + go[x][y].size() + " branches here!");
+				System.out.println("replicated in dir " + dir);
+				gc.replicate(id, dir);
 			}
-			// if ((unit.movementHeat() < 10) && gc.canMove(id, dir)) {
-			// 	gc.moveRobot(id, dir);
-			// }
 		}
+		// if ((unit.movementHeat() < 10) && gc.canMove(id, dir)) {
+		// 	gc.moveRobot(id, dir);
+		// }
 	}
 
 	static void doEarthTurn() {
@@ -295,9 +301,10 @@ public class Player {
 //			for (Direction dir : directions) {
 //				if (tryHarvest(unit, dir)) break;
 //			}
+			followKarbTest(unit);
 			harvestMax(unit);
-			tryMoveRandom(unit);
-			tryReplicateRandom(unit);
+			// tryMoveRandom(unit);
+			// tryReplicateRandom(unit);
 		}
 
 	}
