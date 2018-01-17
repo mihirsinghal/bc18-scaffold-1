@@ -17,6 +17,8 @@ public class Player {
 	static long[][] earthKarb, marsKarb, marsTime;
 	static long totalRocketCost;
 	static ArrayList<MapLocation> blueprintLocations;
+	static int dist[][];
+	static Direction[][] trace;
 	static ArrayList<Direction>[][] go;
 
 	public static void main(String[] args) {
@@ -28,6 +30,16 @@ public class Player {
 
 
 		Collections.addAll(directions, Direction.values()); // note: this includes center
+
+		// prioritize this order for BFS
+		// directions.add(Direction.North);
+		// directions.add(Direction.South);
+		// directions.add(Direction.East);
+		// directions.add(Direction.West);
+		// directions.add(Direction.Northeast);
+		// directions.add(Direction.Northwest);
+		// directions.add(Direction.Southeast);
+		// directions.add(Direction.Southwest);
 
 		// NSEW.add(Direction.North);
 		// NSEW.add(Direction.South);
@@ -59,89 +71,9 @@ public class Player {
 			}
 		}
 
-		// Start of BFS Code
-
-		int[][] dist = new int[earthWidth][earthHeight];
-		Direction[][] trace = new Direction[earthWidth][earthHeight];
-		go = new ArrayList[earthWidth][earthHeight];
-		for(int i = 0; i < earthWidth; i++) {
-			for(int j = 0; j < earthHeight; j++) {
-				dist[i][j] = -1;
-				go[i][j] = new ArrayList<Direction>();
-			}
-		}
-		Queue<MapLocation> bfs = new LinkedList<MapLocation>();
-		int bfsSize = 0;
-
-		VecUnit units = gc.myUnits();
-		for (int i = 0; i < units.size(); i++) {
-			Unit unit = units.get(i);
-			// assert unit.unitType() == UnitType.Worker;
-			MapLocation cur = unit.location().mapLocation();
-			if(bfs.offer(cur)) bfsSize++;
-			dist[cur.getX()][cur.getY()] = 0;
-		}
-
-		while(bfsSize > 0) {
-			MapLocation cur = bfs.poll();
-			if(cur == null) break; // just in case
-			bfsSize--;
-			int cx = cur.getX(), cy = cur.getY();
-			for(Direction dir : directions) {
-				MapLocation nxt = cur.add(dir);
-				if(earthMap.onMap(nxt) == false) continue;
-				if(earthMap.isPassableTerrainAt(nxt) == 0) continue; // should be boolean?
-				int x = nxt.getX(), y = nxt.getY();
-				if(dist[x][y] != -1) continue;
-				dist[x][y] = dist[cx][cy] + 1;
-				trace[x][y] = bc.bcDirectionOpposite(dir);
-				if(bfs.offer(nxt)) bfsSize++;
-			}
-		}
-
-		boolean vis[][] = new boolean[earthWidth][earthHeight];
-		for(int i = 0; i < earthWidth; i++) {
-			for(int j = 0; j < earthHeight; j++) {
-				// condition for if we want to collect from this cell
-				// for now we will get any cell that has karbonite
-				if(earthKarb[i][j] > 0) {
-					MapLocation cur = new MapLocation(Planet.Earth, i, j);
-					while(true) {
-						int x = cur.getX(), y = cur.getY();
-						if(vis[x][y]) break;
-						vis[x][y] = true;
-						if(trace[x][y] == null) break;
-						MapLocation par = cur.add(trace[x][y]);
-						int px = par.getX(), py = par.getY();
-						go[px][py].add(bc.bcDirectionOpposite(trace[x][y]));
-						System.out.println("(" + px + ", " + py + ") --> (" + x + ", " + y + ")");
-						cur = par;
-					}
-				}
-			}
-		}
-
-		// End of BFS Code
-
-		// Distances
-		for(int j = earthHeight - 1; j >= 0; j--) {
-			for(int i = 0; i < earthWidth; i++) {
-				System.out.print(dist[i][j] + " ");
-			}
-			System.out.println();
-		}
-
-		// Visualizing the Directions
-		for(int j = earthHeight - 1; j >= 0; j--) {
-			for(int i = 0; i < earthWidth; i++) {
-				Direction d = trace[i][j];
-				if(d == Direction.North) System.out.print("| ");
-				else if(d == Direction.Northwest) System.out.print("\\ ");
-				else if(d == Direction.Northeast) System.out.print("/ ");
-				else if(d == Direction.East) System.out.print("- ");
-				else System.out.print("  ");
-			}
-			System.out.println();
+		if(gc.planet() == Planet.Earth) {
+			calculateBFS();
+			determinePaths();
 		}
 
 		for(long round = 1; round <= 1000; round++) {
@@ -183,6 +115,133 @@ public class Player {
 			// Submit the actions we've done, and wait for our next turn.
 			gc.nextTurn();
 		}
+	}
+
+	static void calculateBFS() {
+		dist = new int[earthWidth][earthHeight];
+		trace = new Direction[earthWidth][earthHeight];
+		go = new ArrayList[earthWidth][earthHeight];
+		for(int i = 0; i < earthWidth; i++) {
+			for(int j = 0; j < earthHeight; j++) {
+				dist[i][j] = -1;
+				go[i][j] = new ArrayList<Direction>();
+			}
+		}
+		Queue<MapLocation> bfs = new LinkedList<MapLocation>();
+		Queue<MapLocation> bfs2 = new LinkedList<MapLocation>();
+		int bfsSize = 0, bfsSize2 = 0;
+
+		VecUnit units = gc.myUnits();
+		for (int i = 0; i < units.size(); i++) {
+			Unit unit = units.get(i);
+			// assert unit.unitType() == UnitType.Worker;
+			MapLocation cur = unit.location().mapLocation();
+			if(bfs.offer(cur)) bfsSize++;
+			dist[cur.getX()][cur.getY()] = 0;
+		}
+
+		while(bfsSize > 0) {
+			MapLocation cur = bfs.poll();
+			if(cur == null) break; // just in case
+			bfsSize--;
+			int cx = cur.getX(), cy = cur.getY();
+			for(Direction dir : directions) {
+				MapLocation nxt = cur.add(dir);
+				if(earthMap.onMap(nxt) == false) continue;
+				if(earthMap.isPassableTerrainAt(nxt) == 0) continue; // should be boolean?
+				int x = nxt.getX(), y = nxt.getY();
+				if(dist[x][y] != -1) continue;
+				trace[x][y] = bc.bcDirectionOpposite(dir);
+				if(wanted(x, y)) {
+					if(bfs.offer(nxt)) bfsSize++;
+					dist[x][y] = dist[cx][cy];
+				}
+				else {
+					if(bfs2.offer(nxt)) bfsSize2++;
+					dist[x][y] = dist[cx][cy] + 1;
+				}
+			}
+			if(bfsSize == 0) {
+				Queue<MapLocation> tmp = bfs;
+				bfs = bfs2;
+				bfs2 = tmp;
+				int sz_tmp = bfsSize;
+				bfsSize = bfsSize2;
+				bfsSize2 = sz_tmp;
+			}
+		}
+
+		// Distances
+		System.out.println("Distances");
+		System.out.println("---------");
+		for(int j = earthHeight - 1; j >= 0; j--) {
+			for(int i = 0; i < earthWidth; i++) {
+				System.out.print(dist[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+		// Visualizing the Directions
+		System.out.println("Directions");
+		System.out.println("----------");
+		for(int j = earthHeight - 1; j >= 0; j--) {
+			for(int i = 0; i < earthWidth; i++) {
+				Direction d = trace[i][j];
+				if(d == Direction.North) System.out.print("| ");
+				else if(d == Direction.Northwest) System.out.print("\\ ");
+				else if(d == Direction.Northeast) System.out.print("/ ");
+				else if(d == Direction.East) System.out.print("- ");
+				else if(d == Direction.Southeast) System.out.print("\\ ");
+				else if(d == Direction.Southwest) System.out.print("// ");
+				else if(d == Direction.South) System.out.print("| ");
+				else if(d == Direction.West) System.out.print("- ");
+				else System.out.print("  ");
+			}
+			System.out.println();
+		}
+	}
+
+	static void determinePaths() {
+		boolean vis[][] = new boolean[earthWidth][earthHeight];
+		final int maxDist = 100; // let's get everything within...
+		ArrayList<Integer> near[] = new ArrayList[maxDist];
+		for(int i = 0; i < maxDist; i++) {
+			near[i] = new ArrayList<Integer>();
+		}
+		for(int i = 0; i < earthWidth; i++) {
+			for(int j = 0; j < earthHeight; j++) {
+				if(wanted(i, j) && dist[i][j] < maxDist) {
+					near[dist[i][j]].add(1000 * i + j);
+				}
+			}
+		}
+		// for(int i = 0; i < earthWidth; i++) {
+			// for(int j = 0; j < earthHeight; j++) {
+		for(int d = 0; d < maxDist; d++) {
+			for(int pos : near[d]) {
+				int i = pos / 1000, j = pos % 1000;
+				// condition for if we want to collect from this cell
+				// for now we will get any cell that has karbonite
+				// if(wanted(i, j)) {
+					MapLocation cur = new MapLocation(Planet.Earth, i, j);
+					while(true) {
+						int x = cur.getX(), y = cur.getY();
+						if(vis[x][y]) break;
+						vis[x][y] = true;
+						if(trace[x][y] == null) break;
+						MapLocation par = cur.add(trace[x][y]);
+						int px = par.getX(), py = par.getY();
+						go[px][py].add(bc.bcDirectionOpposite(trace[x][y]));
+						System.out.println("(" + px + ", " + py + ") --> (" + x + ", " + y + ")");
+						cur = par;
+					}
+				// }
+			}
+		}
+	}
+
+	static boolean wanted(int x, int y) {
+		return earthKarb[x][y] > 0;
 	}
 
 	static void followKarbTest(Unit unit) {
