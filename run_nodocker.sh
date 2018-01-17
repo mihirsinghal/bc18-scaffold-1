@@ -31,8 +31,4 @@ export NODOCKER=1
 mtput setaf 5
 echo "$ python3.6 $DIR/battlecode-manager/gui.py"
 mtput sgr0
-<<<<<<< HEAD
 python3.6 $DIR/battlecode-manager/gui.py
-=======
-python3 $DIR/battlecode-manager/gui.py
->>>>>>> 04a35b6e5a4470e868b72e911e919bb5db3fb2ed
