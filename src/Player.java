@@ -56,31 +56,70 @@ public class Player {
 		earthHeight = (int) earthMap.getHeight();
 		marsHeight = (int) marsMap.getHeight();
 
-		earthKarb = new long[earthHeight][earthWidth];
-		marsKarb = new long[marsHeight][marsWidth];
-		marsTime = new long[marsHeight][marsWidth];
+		earthKarb = new long[earthWidth][earthHeight];
+		marsKarb = new long[marsWidth][marsHeight];
+		marsTime = new long[marsWidth][marsHeight];
 
 		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket);
 
-		for(int i = 0; i < earthHeight; i++) {
-			for(int j = 0; j < earthWidth; j++) {
+		for(int i = 0; i < earthWidth; i++) {
+			for(int j = 0; j < earthHeight; j++) {
 				MapLocation curLoc = new MapLocation(Planet.Earth, i, j);
 				earthKarb[i][j] = earthMap.initialKarboniteAt(curLoc);
 			}
 		}
 
-		int[][] shortestDist = new int[earthHeight][earthWidth];
-		Arrays.fill(shortestDist, -1);
-		ArrayList<Direction>[][] goWorker = new ArrayList[earthHeight][earthWidth];
-		Queue<MapLocation> bfsQueue = new LinkedList<MapLocation>();
+		int[][] dist = new int[earthWidth][earthHeight];
+		Direction[][] trace = new Direction[earthWidth][earthHeight];
+		Arrays.fill(dist, -1);
+		ArrayList<Direction>[][] go = new ArrayList[earthWidth][earthHeight];
+		Queue<MapLocation> bfs = new LinkedList<MapLocation>();
+		int bfsSize = 0;
 
 		VecUnit units = gc.myUnits();
 		for (int i = 0; i < units.size(); i++) {
 			Unit unit = units.get(i);
 			// assert unit.unitType() == UnitType.Worker;
 			MapLocation cur = unit.location().mapLocation();
-			bfsQueue.offer(cur);
-			shortestDist[cur.getX()][cur.getY()] = 0;
+			if(bfs.offer(cur)) bfsSize++;
+			dist[cur.getX()][cur.getY()] = 0;
+		}
+
+		while(bfsSize > 0) {
+			MapLocation cur = bfs.poll();
+			if(cur == null) break; // just in case
+			bfsSize--;
+			int cx = cur.getX(), cy = cur.getY();
+			for(Direction dir : directions) {
+				MapLocation nxt = cur.add(dir);
+				if(earthMap.onMap(nxt) == false) continue;
+				if(earthMap.isPassableTerrainAt(nxt) == 0) continue; // should be boolean?
+				int x = nxt.getX(), y = nxt.getY();
+				if(dist[x][y] != -1) continue;
+				dist[x][y] = dist[cx][cy] + 1;
+				trace[x][y] = bc.bcDirectionOpposite(dir);
+				if(bfs.offer(nxt)) bfsSize++;
+			}
+		}
+
+		boolean vis[][] = new boolean[earthWidth][earthHeight];
+		for(int i = 0; i < earthWidth; i++) {
+			for(int j = 0; j < earthHeight; j++) {
+				// condition for if we want to collect from this cell
+				// for now we will get any cell that has karbonite
+				if(earthKarb[i][j] > 0) {
+					MapLocation cur = new MapLocation(Planet.Earth, i, j);
+					while(true) {
+						int x = cur.getX(), y = cur.getY();
+						if(vis[x][y]) break;
+						if(trace[x][y] == null) break;
+						MapLocation par = cur.add(trace[x][y]);
+						int px = par.getX(), py = par.getY();
+						go[px][py].add(bc.bcDirectionOpposite(trace[x][y]));
+						vis[x][y] = true;
+					}
+				}
+			}
 		}
 
 		for(long round = 1; round <= 1000; round++) {
