@@ -192,7 +192,7 @@ public class Player {
 				else if(d == Direction.Northeast) System.out.print("/ ");
 				else if(d == Direction.East) System.out.print("- ");
 				else if(d == Direction.Southeast) System.out.print("\\ ");
-				else if(d == Direction.Southwest) System.out.print("// ");
+				else if(d == Direction.Southwest) System.out.print("/ ");
 				else if(d == Direction.South) System.out.print("| ");
 				else if(d == Direction.West) System.out.print("- ");
 				else System.out.print("  ");
