@@ -1,7 +1,9 @@
 working_dir
-replay*
-viewer_latest*
-viewer_currentInstall.json
-bc18-scaffold-1.iml
+# ignore default replay
+/replay.bc18
+# ignore viewer
+/viewer_latest/
+/viewer_currentInstall.json
+*.iml
 .DS_Store
-.idea*
+.idea/
