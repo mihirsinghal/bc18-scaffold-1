@@ -60,6 +60,20 @@ public class Player {
 		marsKarb = new long[marsHeight][marsWidth];
 		marsTime = new long[marsHeight][marsWidth];
 
+		int[][] shortestDist = new int[earthHeight][earthWidth];
+		Arrays.fill(shortestDist, -1);
+		ArrayList<Direction>[][] goWorker = new ArrayList<Direction>[earthHeight][earthWidth];
+		Queue<MapLocation> bfsQueue = new Queue<MapLocation>();
+
+		VecUnit units = gc.myUnits();
+		for (int i = 0; i < units.size(); i++) {
+			Unit unit = units.get(i);
+			// assert unit.unitType() == UnitType.Worker;
+			MapLocation cur = unit.location().mapLocation();
+			bfsQueue.offer(cur);
+			shortestDist[cur.getX()][cur.getY()] = 0;
+		}
+
 		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket);
 
 		for(int i = 0; i < earthHeight; i++) {
@@ -94,14 +108,14 @@ public class Player {
 				}
 				if(researchInfo.hasNextInQueue())
 					System.out.println("Next up: " + researchInfo.nextInQueue());
-				System.out.println(researchInfo.toJson());
+				// System.out.println(researchInfo.toJson());
 			}
 
 			// TODO exception handling (try/catch loop)
 			if (gc.planet() == Planet.Earth) {
 				doEarthTurn();
 			} else {
-				assert gc.planet() == Planet.Mars;
+				// assert gc.planet() == Planet.Mars;
 				doMarsTurn();
 			}
 
@@ -117,7 +131,7 @@ public class Player {
 			VecUnit units = gc.myUnits();
 			for (int i = 0; i < units.size(); i++) {
 				Unit unit = units.get(i);
-				assert unit.unitType() == UnitType.Worker;
+				// assert unit.unitType() == UnitType.Worker;
 				tryReplicateRandom(unit); // assumes that there are only workers to start
 			}
 
