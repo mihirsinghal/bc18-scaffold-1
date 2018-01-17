@@ -48,15 +48,15 @@ R = red_worker 100k
 # every line of a map must start with ">"
 # use the symbols you defined above to lay out the map
 
-> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ R  
-> _ _ _ _ _ _ _ _ x x _ _ _ _ _ _ _ _ _ 2  
+> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ r  
+> _ _ _ _ _ _ _ _ x x _ _ _ _ _ _ _ _ _ _  
 > _ _ _ _ _ _ _ x x x _ _ _ _ _ _ _ _ _ 2  
 > _ _ _ _ _ _ x x x _ _ _ _ _ _ _ _ _ _ 2  
 > _ _ _ _ _ x x x _ _ _ _ _ _ _ _ _ _ _ 2  
-> _ _ _ _ x x x _ _ _ _ _ _ _ _ _ _ _ _ 2  
+> _ _ _ _ x x x _ _ _ _ _ _ 2 2 2 2 2 2 2  
 > _ _ _ x x x _ _ _ _ _ _ _ _ _ _ _ _ _ 2  
-> _ _ _ x x _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  
-> _ _ x x x _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  
+> _ _ _ x x _ _ _ _ _ _ _ _ _ _ _ _ _ _ 2  
+> _ _ x x x _ _ _ _ _ _ _ _ _ _ _ _ _ _ 2  
 > _ _ x x x _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  
 
 # that's only 10 lines long; since we set symmetry:vertical, the rest of the map will be filled in
