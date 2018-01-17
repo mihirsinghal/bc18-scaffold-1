@@ -21,6 +21,7 @@ public class Player {
 	static int dist[][];
 	static Direction[][] trace;
 	static ArrayList<Direction>[][] go;
+	static int done[][];
 
 	public static void main(String[] args) {
 
@@ -207,6 +208,7 @@ public class Player {
 		dist = new int[earthWidth][earthHeight];
 		trace = new Direction[earthWidth][earthHeight];
 		go = new ArrayList[earthWidth][earthHeight];
+		done = new int[earthWidth][earthHeight];
 		for (int i = 0; i < earthWidth; i++) {
 			for (int j = 0; j < earthHeight; j++) {
 				dist[i][j] = -1;
@@ -331,12 +333,14 @@ public class Player {
 		MapLocation loc = unit.location().mapLocation();
 		int x = loc.getX(), y = loc.getY();
 		if (go[x][y].size() == 0) return;
-		for (Direction dir : go[x][y]) {
+		for (int i = done[x][y]; i < go[x][y].size(); i++) {
+			Direction dir = go[x][y].get(i);
 			if (gc.canReplicate(id, dir)) {
 				System.out.println("--- unit " + id + " at x = " + x + " y = " + y);
 				System.out.println("there are " + go[x][y].size() + " branches here!");
 				System.out.println("replicated in dir " + dir);
 				gc.replicate(id, dir);
+				done[x][y]++;
 			}
 		}
 		/*
