@@ -108,6 +108,13 @@ public class Player {
 			}
 		}
 
+		for(int j = earthHeight - 1; j >= 0; j--) {
+			for(int i = 0; i < earthWidth; i++) {
+				System.out.print(dist[i][j] + " ");
+			}
+			System.out.println();
+		}
+
 		boolean vis[][] = new boolean[earthWidth][earthHeight];
 		for(int i = 0; i < earthWidth; i++) {
 			for(int j = 0; j < earthHeight; j++) {
@@ -118,14 +125,28 @@ public class Player {
 					while(true) {
 						int x = cur.getX(), y = cur.getY();
 						if(vis[x][y]) break;
+						vis[x][y] = true;
 						if(trace[x][y] == null) break;
 						MapLocation par = cur.add(trace[x][y]);
 						int px = par.getX(), py = par.getY();
 						go[px][py].add(bc.bcDirectionOpposite(trace[x][y]));
-						vis[x][y] = true;
+						System.out.println("(" + px + ", " + py + ") --> (" + x + ", " + y + ")");
+						cur = par;
 					}
 				}
 			}
+		}
+
+		for(int j = earthHeight - 1; j >= 0; j--) {
+			for(int i = 0; i < earthWidth; i++) {
+				Direction d = trace[i][j];
+				if(d == Direction.North) System.out.print("| ");
+				else if(d == Direction.Northwest) System.out.print("\\ ");
+				else if(d == Direction.Northeast) System.out.print("/ ");
+				else if(d == Direction.East) System.out.print("- ");
+				else System.out.print("  ");
+			}
+			System.out.println();
 		}
 
 		for(long round = 1; round <= 1000; round++) {
@@ -172,18 +193,24 @@ public class Player {
 
 	static void followKarbTest() {
 		VecUnit units = gc.myUnits();
-		for (int i = 0; i < units.size(); i++) {
+		for(int i = 0; i < units.size(); i++) {
 			Unit unit = units.get(i);
 			int id = unit.id();
 			MapLocation loc = unit.location().mapLocation();
 			int x = loc.getX(), y = loc.getY();
-			System.out.println("unit " + id + " at x = " + x + " y = " + y);
-			System.out.println("there are " + go[x][y].size() + " branches here!");
+			// System.out.println("unit " + id + " at x = " + x + " y = " + y);
+			// System.out.println("there are " + go[x][y].size() + " branches here!");
 			if(go[x][y].size() == 0) return;
-			Direction dir = go[x][y].get(0);
-			if ((unit.movementHeat() < 10) && gc.canMove(id, dir)) {
-				gc.moveRobot(id, dir);
+			for(Direction dir : go[x][y]) {
+				if(gc.canReplicate(id, dir)) {
+					System.out.println("unit " + id + " at x = " + x + " y = " + y);
+					System.out.println("replicated in dir " + dir);
+					gc.replicate(id, dir);
+				}
 			}
+			// if ((unit.movementHeat() < 10) && gc.canMove(id, dir)) {
+			// 	gc.moveRobot(id, dir);
+			// }
 		}
 	}
 
