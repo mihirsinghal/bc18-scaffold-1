@@ -60,10 +60,19 @@ public class Player {
 		marsKarb = new long[marsHeight][marsWidth];
 		marsTime = new long[marsHeight][marsWidth];
 
+		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket);
+
+		for(int i = 0; i < earthHeight; i++) {
+			for(int j = 0; j < earthWidth; j++) {
+				MapLocation curLoc = new MapLocation(Planet.Earth, i, j);
+				earthKarb[i][j] = earthMap.initialKarboniteAt(curLoc);
+			}
+		}
+
 		int[][] shortestDist = new int[earthHeight][earthWidth];
 		Arrays.fill(shortestDist, -1);
-		ArrayList<Direction>[][] goWorker = new ArrayList<Direction>[earthHeight][earthWidth];
-		Queue<MapLocation> bfsQueue = new Queue<MapLocation>();
+		ArrayList<Direction>[][] goWorker = new ArrayList[earthHeight][earthWidth];
+		Queue<MapLocation> bfsQueue = new LinkedList<MapLocation>();
 
 		VecUnit units = gc.myUnits();
 		for (int i = 0; i < units.size(); i++) {
@@ -72,15 +81,6 @@ public class Player {
 			MapLocation cur = unit.location().mapLocation();
 			bfsQueue.offer(cur);
 			shortestDist[cur.getX()][cur.getY()] = 0;
-		}
-
-		totalRocketCost = bc.bcUnitTypeBlueprintCost(UnitType.Rocket);
-
-		for(int i = 0; i < earthHeight; i++) {
-			for(int j = 0; j < earthWidth; j++) {
-				MapLocation curLoc = new MapLocation(Planet.Earth, i, j);
-				earthKarb[i][j] = earthMap.initialKarboniteAt(curLoc);
-			}
 		}
 
 		for(long round = 1; round <= 1000; round++) {
